@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>
+        Barber Shop
+    </title>
+</head>
+<body>
+<main>
+    <div class="container py-4">
+    <header class="pb-3 mb-4 border-bottom">
+        <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">
+                Items
+            </span>
+        </a>
+    </header>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+            <button id="new_item_button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_item_modal">
+                NEW ITEM
+            </button>
+            <div class="row py-3">
+                <table id="items_table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- JS loaded -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="pt-3 mt-4 text-muted border-top">
+        © 2023
+    </footer>
+    </div>
+
+    <!-- create_item_modal -->
+    <div class="modal fade" id="create_item_modal" tabindex="-1" aria-labelledby="create_item_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title" id="create_item_modal_label">Create item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="create_item_modal_body">
+                    <input class="form-control mb-2" type="text" name="name" id="create_item_name_input" placeholder="Name">
+                    <input class="form-control" type="text" name="description" id="create_item_description_input" placeholder="Description">
+                </div>
+                <div class="modal-footer">
+                    <button id="create_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="create_item_button" type="button" class="btn btn-primary" disabled>CREATE!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- show_item_modal -->
+    <div class="modal fade" id="show_item_modal" tabindex="-1" aria-labelledby="show_item_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-light">
+                    <h5 class="modal-title" id="show_item_modal_label">Show item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="show_item_modal_body">
+                    <input class="form-control mb-2" type="text" name="name" id="show_item_name_input" placeholder="Name" disabled>
+                    <input class="form-control" type="text" name="description" id="show_item_description_input" placeholder="Description" disabled>
+                </div>
+                <div class="modal-footer">
+                    <button id="show_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit_item_modal -->
+    <div class="modal fade" id="edit_item_modal" tabindex="-1" aria-labelledby="edit_item_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="edit_item_modal_label">Edit item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="edit_item_modal_body">
+                    <input class="form-control mb-2" type="text" name="name" id="edit_item_name_input" placeholder="Name">
+                    <input class="form-control" type="text" name="description" id="edit_item_description_input" placeholder="Description">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="edit_item_cancel_button" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning" id="edit_item_button">EDIT!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete_item_modal -->
+    <div class="modal fade" id="delete_item_modal" tabindex="-1" aria-labelledby="delete_item_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="delete_item_modal_label">Delete item?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="delete_item_modal_body">
+                    <input class="form-control mb-2" type="text" name="name" id="delete_item_name_input" placeholder="Name" disabled>
+                    <input class="form-control" type="text" name="value" id="delete_item_description_input" placeholder="Value" disabled>
+                </div>
+                <div class="modal-footer">
+                    <button id="delete_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="delete_item_button" type="button" class="btn btn-danger">Delete!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- success_modal -->
+    <div class="modal fade" id="success_modal" tabindex="-1" aria-labelledby="success_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-light">
+                    <h5 class="modal-title" id="success_modal_label">Success!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="success_modal_body">
+                    <h5 class="text-success text-center">Operation done successfully.</h5>
+                </div>
+                <div class="modal-footer">
+                    <button id="success_modal_button" type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- error_modal -->
+    <div class="modal fade" id="error_modal" tabindex="-1" aria-labelledby="error_modal_label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="error_modal_title">Error!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="error_modal_body">
+                    <h5 class="text-danger text-center">Operation not completed.</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="error_modal_button" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+<script>
+
+class Item
+{
+    id
+    name
+    description
+}
+
+// persistence
+var items = []
+var counter = 1;
+
+class ItemApp
+{
+    constructor()
+    {
+        this.create_item_bindings()
+        this.read_item_bindings()
+    }
+
+    /********************* Create *********************/
+    // elements
+    create_item_button = document.getElementById(`create_item_button`)
+    create_item_name_input = document.getElementById(`create_item_name_input`)
+    create_item_description_input = document.getElementById(`create_item_description_input`)
+    create_item_modal = new bootstrap.Modal(document.getElementById('create_item_modal'))
+
+    // bindings
+    create_item_bindings()
+    {
+        this.create_item_name_input.addEventListener(`input`, event => {
+            this.enable_disable_create_item_button()
+        })
+
+        this.create_item_description_input.addEventListener(`input`, event => {
+            this.enable_disable_create_item_button()
+        })
+
+        this.create_item_button.addEventListener(`click`, event => {
+            this.create_item_modal.hide()
+            this.create()
+        })
+    }
+
+    enable_disable_create_item_button()
+    {
+        if (this.create_item_name_input.value.length < 1 || this.create_item_description_input.value.length < 1) {
+            this.create_item_button.disabled = true
+        } else {
+            this.create_item_button.disabled = false
+        }
+    }
+
+    // data methods
+    store(element)
+    {
+        try {
+            let item = new Item
+            item.id = element.id
+            item.name = element.name
+            item.description = element.description
+            items.push(item)
+            this.create_item_name_input.value = ``
+            this.create_item_description_input.value = ``
+            this.success(`Stored`)
+            this.get()
+        } catch (error) {
+            this.error()
+        }
+    }
+
+    // view methods
+    create()
+    {
+        let data = {
+            id: counter++,
+            name: this.create_item_name_input.value,
+            description: this.create_item_description_input.value
+        }
+        this.store(data)
+    }
+
+    /********************* Read *********************/
+    // elements
+    items_table = document.getElementById('items_table')
+
+    // bindings
+    read_item_bindings()
+    {
+        this.get()
+    }
+
+    // data methods
+    get()
+    {
+        let elements = items
+        this.all(elements)
+    }
+    
+    // view methods
+    all(items)
+    {
+        let new_tbody = document.createElement('tbody')
+
+        if (items.length == 0) {
+            let row = new_tbody.insertRow(0)
+            let cell = row.insertCell(0)
+            cell.innerHTML = `No items found.`
+            cell.colSpan = this.items_table.rows[0].cells.length
+            cell.className = `text-center`
+        } else {
+            for (let index = 0; index < items.length; index++) {
+                let item = items[index]
+                if (!item) {
+                    continue
+                }
+                let row = new_tbody.insertRow()
+                row.insertCell(0).innerHTML = item.id
+                row.insertCell(1).innerHTML = item.name
+                row.insertCell(2).innerHTML = item.description
+                row.insertCell(3).innerHTML = `
+                <button type="button" class="btn btn-secondary" onclick="app.find(${item.id})">SHOW</button>
+                <button type="button" class="btn btn-warning" onclick="app.edit(${item.id})">EDIT</button>
+                <button type="button" class="btn btn-danger" onclick="app.remove(${item.id})">DELETE</button>
+                `
+            }
+        }
+        this.items_table.replaceChild(new_tbody, document.querySelector(`#items_table tbody`))
+    }
+    
+    /********************* Show *********************/
+    // elements
+    show_item_name_input = document.getElementById('show_item_name_input')
+    show_item_description_input = document.getElementById('show_item_description_input')
+    show_item_modal = new bootstrap.Modal(document.getElementById('show_item_modal'))
+
+    // data methods
+    find(id)
+    {
+        let element = items.find(item => {
+            return item.id == id
+        })
+        this.show(element)
+    }
+    
+    // view methods
+    show(item)
+    {
+        if (item) {
+            this.show_item_name_input.value = `${item.name}`
+            this.show_item_description_input.value = `${item.description}`
+            this.show_item_modal.show()
+        } else {
+            this.error()
+        }
+    }
+
+    /********************* Edit *********************/
+    // elements
+    edit_item_button = document.getElementById('edit_item_button')
+    edit_item_name_input = document.getElementById('edit_item_name_input')
+    edit_item_description_input = document.getElementById('edit_item_description_input')
+    edit_item_modal = new bootstrap.Modal(document.getElementById('edit_item_modal'))
+
+    // data methods
+    update(element)
+    {
+        try {
+            element.name = this.edit_item_name_input.value
+            element.description = this.edit_item_description_input.value
+            this.success(`Updated`)
+            this.get()            
+        } catch (error) {
+            this.error()
+        }
+    }
+    
+    // view methods
+    edit(id)
+    {
+        let element = items.find(item => {
+            return item.id == id
+        })
+        this.edit_item_name_input.value = element.name
+        this.edit_item_description_input.value = element.description
+        this.edit_item_button.addEventListener(`click`, (event) => {
+            this.update(element)
+            this.edit_item_modal.hide()
+        })
+        this.edit_item_modal.show()
+    }  
+
+    /********************* Delete *********************/
+    // elements
+    delete_item_button = document.getElementById(`delete_item_button`)
+    delete_item_name_input = document.getElementById(`delete_item_name_input`)
+    delete_item_description_input = document.getElementById(`delete_item_description_input`)
+    delete_item_modal = new bootstrap.Modal(document.getElementById('delete_item_modal'))
+
+    // data methods
+    delete(element)
+    {
+        try {
+            items = items.filter(item => {
+                return item.id != element.id
+            })
+            this.success(`Deleted`)
+            this.get()            
+        } catch (error) {
+            this.error()
+        }
+    }
+
+    // view methods
+    remove(id)
+    {
+        let element = items.find(item => {
+            return item.id == id
+        })
+        this.delete_item_name_input.value = element.name
+        this.delete_item_description_input.value = element.description
+        this.delete_item_button.addEventListener(`click`, (event) => {
+            this.delete(element)
+            this.delete_item_modal.hide()
+        })
+        this.delete_item_modal.show()
+    }    
+
+    // confirm(message)
+    
+    /********************* Success *********************/
+    // elements
+    success_modal = new bootstrap.Modal(document.getElementById('success_modal'))
+    
+    // view methods
+    success(message)
+    {
+        this.success_modal.show()
+    }
+
+    /********************* Error *********************/
+    // elements
+    error_modal = new bootstrap.Modal(document.getElementById('error_modal'))
+    
+    // view methods
+    error(message)
+    {
+        this.error_modal.show()
+    }
+}
+var app = new ItemApp
+
+// ItemApp.create()
+// ItemApp.find(1)
+// ItemApp.get()
+// ItemApp.edit(1)
+// ItemApp.remove(1)
+
+</script>
+<script>
+// class Item
+// {
+//     // data/properties
+//     id
+//     name
+//     description
+// }
+
+// // persistence
+// var items = []
+
+// class ItemApp
+// {
+//     // methods/actions
+//     static get()
+//     {
+//         let elements = items
+//         this.all(elements)
+//     }
+
+//     static find(id)
+//     {
+//         let element = items.find(item => {
+//             return item.id == id
+//         })
+//         this.show(element)
+//     }
+
+//     static store(element)
+//     {
+//         let item = new Item
+//         item.id = element.id
+//         item.name = element.name
+//         item.description = element.description
+//         items.push(item)
+//         this.success(`Stored`)
+//     }
+
+//     static update(element)
+//     {
+//         element.name = `Groot`
+//         element.description = `I am Groot`
+//         this.success(`Updated`)
+//     }
+    
+//     static delete(element)
+//     {
+//         items = items.filter(item => {
+//             return item.id != element.id
+//         })
+//         this.success(`Deleted`)
+//     }
+    
+//     // view/elements
+//     static all(items)
+//     {
+//         items.forEach(item => {
+//             console.log(`ID: ${item.id} - NAME: ${item.name} - DESCRIPTION: ${item.description}`)
+//         })
+//     }
+    
+//     static show(item)
+//     {
+//         if (item) {
+//             console.log(`ID: ${item.id} - NAME: ${item.name} - DESCRIPTION: ${item.description}`)
+//         } else {
+//             console.log(`Not found`)
+//         }
+//     }
+
+//     static create()
+//     {
+//         let data = {
+//             id: 1,
+//             name: `Thor`,
+//             description: `God of Thunder`
+//         }
+//         this.store(data)
+//     }
+    
+//     static edit(id)
+//     {
+//         let element = items.find(item => {
+//             return item.id == id
+//         })
+//         this.update(element)
+//     }
+    
+//     static remove(id)
+//     {
+//         let element = items.find(item => {
+//             return item.id == id
+//         })
+//         this.delete(element)
+//     }
+
+//     // confirm(message)
+//     // error(message)
+//     static success(message)
+//     {
+//         console.log(message)
+//     }
+// }
+// ItemApp.create()
+// ItemApp.find(1)
+// ItemApp.get()
+// ItemApp.edit(1)
+// ItemApp.remove(1)
+</script>
+<script>
+
+// const configuration = {
+//     database_name: `database`,
+//     database_version: 1,
+//     objects_store: [
+//         {
+//             name: `object_store`,
+//             keyPath: `id`, 
+//             autoIncrement: true,
+//             indexes: [
+//                 { index_name: `name`, key_path: `name`, options: { unique: true } },
+//                 { index_name: `description`, key_path: `description`, options: { unique: false } },
+//             ],
+//         },
+//     ],
+// }    
+
+// class DB
+// {
+//     // Config
+//     db_name = `database`
+//     db_version = 1
+//     object_store = { keyPath: `id`, autoIncrement: true, name: `object_store` }
+//     indexes = [
+//         { indexName: `name`, keyPath: `name`, options: { unique: true } },
+//         { indexName: `description`, keyPath: `description`, options: { unique: false } },
+//     ]
+
+//     // Create an instance of a db object for us to store the open database in
+//     db
+
+//     constructor(configuration)
+//     {
+//         this.handlers(configuration)
+//     }
+
+//     handlers(configuration)
+//     {
+//         // Open our database it is created if it doesn't already exist
+//         // (see the upgradeneeded handler below)
+//         this.openRequest = window.indexedDB.open(configuration.database_name, configuration.database_version)
+
+//         // error handler signifies that the database didn't open successfully
+//         this.openRequest.addEventListener("error", () => {
+//             console.error("Database failed to open")
+//         })
+
+//         // success handler signifies that the database opened successfully
+//         this.openRequest.addEventListener("success", () => {
+//             console.log("Database opened successfully")
+
+//             // Store the opened database object in the db variable. This is used a lot below
+//             this.db = this.openRequest.result
+//         })
+
+//         // Set up the database tables if this has not already been done
+//         this.openRequest.addEventListener("upgradeneeded", (e) => {
+            
+//             // Grab a reference to the opened database
+//             this.db = e.target.result
+
+//             this.objects_store = []
+
+//             configuration.objects_store.forEach(object_store => {
+
+//                 // Create an objectStore in our database to store notes and an auto-incrementing key
+//                 // An objectStore is similar to a 'table' in a relational database
+//                 let created_object_store = this.db.createObjectStore(object_store.name, object_store)
+//                 this.objects_store.push(created_object_store)
+
+//                 // Define what data items the objectStore will contain
+//                 object_store.indexes.forEach(index => {
+//                     created_object_store.createIndex(index.index_name, index.key_path, index.options)
+//                 })
+//             })
+
+//             // Create an objectStore in our database to store notes and an auto-incrementing key
+//             // An objectStore is similar to a 'table' in a relational database
+//             // const objectStore = this.db.createObjectStore(this.object_store.name, this.object_store)
+
+//             // Define what data items the objectStore will contain
+//             // this.indexes.forEach(index => {
+//             //     objectStore.createIndex(index.indexName, index.keyPath, index.options)
+//             // })
+
+//             console.log("Database setup complete")
+//         })
+//     }
+
+//     all()
+//     {
+//         // Open our object store and then get a cursor - which iterates through all the
+//         // different data items in the store
+//         const objectStore = this.db.transaction(this.object_store.name).objectStore(this.object_store.name)
+
+//         var records = []
+
+//         objectStore.openCursor().addEventListener("success", (e) => {
+//             // Get a reference to the cursor
+//             const cursor = e.target.result
+            
+//             // If there is still another data item to iterate through, keep running this code
+//             if (cursor) {
+//                 records.push(cursor.value)
+//                 cursor.continue()
+//             }
+//         })
+
+//         return records
+//     }
+
+//     store(new_item)
+//     {
+//         // open a read/write db transaction, ready for adding the data
+//         const transaction = this.db.transaction([this.object_store.name], "readwrite")
+
+//         // call an object store that's already been added to the database
+//         const objectStore = transaction.objectStore(this.object_store.name)
+
+//         // Make a request to add a new item object to the object store
+//         const addRequest = objectStore.add(new_item)
+
+//         addRequest.addEventListener("success", () => {
+//             console.log(`addRequest success`)
+//         })
+
+//         // Report on the success of the transaction completing, when everything is done
+//         transaction.addEventListener("complete", () => {
+//             console.log("Transaction completed: database modification finished.")
+//         })
+
+//         // Report on the error of the transaction completing, when everything failed
+//         transaction.addEventListener("error", () => {
+//             console.log("Transaction not opened due to error")
+//         })
+//     }
+
+//     find(item_id)
+// 	{
+// 		// find an item
+//         // open a read/write db transaction, ready for finding the data
+//         const transaction = this.db.transaction([this.object_store.name], "readonly")
+
+//         // call an object store that's already been added to the database
+//         const objectStore = transaction.objectStore(this.object_store.name)
+
+//         var record
+
+//         // Make a request to add a new item object to the object store
+//         const findRequest = objectStore.get(item_id)
+
+//         findRequest.addEventListener("success", (event) => {
+//             console.log(event.target.result)
+//             record = event.target.result
+//         })
+
+//         // Report on the success of the transaction completing, when everything is done
+//         transaction.addEventListener("complete", () => {
+//             console.log("Transaction completed: database reading finished.")
+//         })
+
+//         // Report on the error of the transaction completing, when everything failed
+//         transaction.addEventListener("error", () => {
+//             console.log("Transaction not opened due to error")
+//         })
+
+//         return record
+// 	}
+
+// 	update(item)
+// 	{
+// 		// Update an item
+// 	}
+
+// 	destroy(item_id)
+// 	{
+// 		// Delete an item
+// 	}
+// }
+
+// var db = new DB(configuration)
+
+// // db.store({
+// //     name: `Leo`,
+// //     description: `Leonardo`,
+// // })
+
+// // db.find()
+
+// class User
+// {
+//     id
+//     name
+//     description
+// }
+
+
+
+
+</script>
+</body>
+</html>
