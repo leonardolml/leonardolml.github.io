@@ -12,16 +12,16 @@
 <body>
 <main>
     <div class="container py-4">
-    <header class="pb-3 mb-4 border-bottom">
+    <header class="pb-3 mb-5 border-bottom">
         <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
             <span class="fs-4">
                 Items
             </span>
         </a>
     </header>
-    <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow">
         <div class="container-fluid">
-            <button id="new_item_button" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_item_modal">
+            <button id="new_item_button" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#create_item_modal">
                 NEW ITEM
             </button>
             <div class="row py-3">
@@ -30,8 +30,8 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col" class="w-50">Description</th>
+                            <th scope="col" class="w-25 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <footer class="pt-3 mt-4 text-muted border-top">
+    <footer class="pt-3 mt-5 text-muted border-top">
         © 2023
     </footer>
     </div>
@@ -51,16 +51,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="create_item_modal_label">Create item</h5>
+                    <h6 class="modal-title" id="create_item_modal_label">Create item</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="create_item_modal_body">
                     <input class="form-control mb-2" type="text" name="name" id="create_item_name_input" placeholder="Name">
                     <input class="form-control" type="text" name="description" id="create_item_description_input" placeholder="Description">
                 </div>
-                <div class="modal-footer">
-                    <button id="create_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="create_item_button" type="button" class="btn btn-primary" disabled>CREATE!</button>
+                <div class="modal-footer py-2 justify-content-between">
+                    <button id="create_item_cancel_button" type="button" class="btn btn-sm w-25 btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="create_item_button" type="button" class="btn btn-sm w-25 btn-primary" disabled>CREATE!</button>
                 </div>
             </div>
         </div>
@@ -71,15 +71,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-secondary text-light">
-                    <h5 class="modal-title" id="show_item_modal_label">Show item</h5>
+                    <h6 class="modal-title" id="show_item_modal_label">Show item</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="show_item_modal_body">
                     <input class="form-control mb-2" type="text" name="name" id="show_item_name_input" placeholder="Name" disabled>
                     <input class="form-control" type="text" name="description" id="show_item_description_input" placeholder="Description" disabled>
                 </div>
-                <div class="modal-footer">
-                    <button id="show_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
+                <div class="modal-footer py-2">
+                    <button id="show_item_cancel_button" type="button" class="btn btn-sm w-25 btn-secondary" data-bs-dismiss="modal">CLOSE</button>
                 </div>
             </div>
         </div>
@@ -90,16 +90,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-warning">
-                    <h5 class="modal-title" id="edit_item_modal_label">Edit item</h5>
+                    <h6 class="modal-title" id="edit_item_modal_label">Edit item</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="edit_item_modal_body">
                     <input class="form-control mb-2" type="text" name="name" id="edit_item_name_input" placeholder="Name">
                     <input class="form-control" type="text" name="description" id="edit_item_description_input" placeholder="Description">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="edit_item_cancel_button" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-warning" id="edit_item_button">EDIT!</button>
+                <div class="modal-footer py-2 justify-content-between">
+                    <button type="button" class="btn btn-sm w-25 btn-secondary" id="edit_item_cancel_button" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-sm w-25 btn-warning" id="edit_item_button">EDIT!</button>
                 </div>
             </div>
         </div>
@@ -110,16 +110,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="delete_item_modal_label">Delete item?</h5>
+                    <h6 class="modal-title" id="delete_item_modal_label">Delete item?</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="delete_item_modal_body">
                     <input class="form-control mb-2" type="text" name="name" id="delete_item_name_input" placeholder="Name" disabled>
                     <input class="form-control" type="text" name="value" id="delete_item_description_input" placeholder="Value" disabled>
                 </div>
-                <div class="modal-footer">
-                    <button id="delete_item_cancel_button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="delete_item_button" type="button" class="btn btn-danger">Delete!</button>
+                <div class="modal-footer py-2 justify-content-between">
+                    <button id="delete_item_cancel_button" type="button" class="btn btn-sm w-25 btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="delete_item_button" type="button" class="btn btn-sm w-25 btn-danger">DELETE!</button>
                 </div>
             </div>
         </div>
@@ -130,14 +130,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-success text-light">
-                    <h5 class="modal-title" id="success_modal_label">Success!</h5>
+                    <h6 class="modal-title" id="success_modal_label">Success!</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="success_modal_body">
-                    <h5 class="text-success text-center">Operation done successfully.</h5>
+                <div class="modal-body py-4" id="success_modal_body">
+                    <h6 class="text-success text-center">Operation done successfully.</h6>
                 </div>
-                <div class="modal-footer">
-                    <button id="success_modal_button" type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                <div class="modal-footer py-2">
+                    <button id="success_modal_button" type="button" class="btn btn-sm w-25 btn-success" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -148,14 +148,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-danger text-light">
-                    <h5 class="modal-title" id="error_modal_title">Error!</h5>
+                    <h6 class="modal-title" id="error_modal_title">Error!</h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="error_modal_body">
-                    <h5 class="text-danger text-center">Operation not completed.</h5>
+                <div class="modal-body py-4" id="error_modal_body">
+                    <h6 class="text-danger text-center">Operation not completed.</h6>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="error_modal_button" data-bs-dismiss="modal">OK</button>
+                <div class="modal-footer py-2">
+                    <button type="button" class="btn btn-sm w-25 btn-danger" id="error_modal_button" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -283,11 +283,13 @@ class ItemApp
                 row.insertCell(0).innerHTML = item.id
                 row.insertCell(1).innerHTML = item.name
                 row.insertCell(2).innerHTML = item.description
-                row.insertCell(3).innerHTML = `
-                <button type="button" class="btn btn-secondary" onclick="app.find(${item.id})">SHOW</button>
-                <button type="button" class="btn btn-warning" onclick="app.edit(${item.id})">EDIT</button>
-                <button type="button" class="btn btn-danger" onclick="app.remove(${item.id})">DELETE</button>
+                let action_cell = row.insertCell(3)
+                action_cell.innerHTML = `
+                <button type="button" class="btn btn-sm btn-secondary" onclick="app.find(${item.id})">SHOW</button>
+                <button type="button" class="btn btn-sm btn-warning" onclick="app.edit(${item.id})">EDIT</button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="app.remove(${item.id})">DELETE</button>
                 `
+                action_cell.classList.add(`text-center`)
             }
         }
         this.items_table.replaceChild(new_tbody, document.querySelector(`#items_table tbody`))
@@ -348,10 +350,10 @@ class ItemApp
         })
         this.edit_item_name_input.value = element.name
         this.edit_item_description_input.value = element.description
-        this.edit_item_button.addEventListener(`click`, (event) => {
+        this.edit_item_button.onclick = () => {
             this.update(element)
             this.edit_item_modal.hide()
-        })
+        }
         this.edit_item_modal.show()
     }  
 
@@ -384,10 +386,10 @@ class ItemApp
         })
         this.delete_item_name_input.value = element.name
         this.delete_item_description_input.value = element.description
-        this.delete_item_button.addEventListener(`click`, (event) => {
+        this.delete_item_button.onclick = () => {
             this.delete(element)
             this.delete_item_modal.hide()
-        })
+        }
         this.delete_item_modal.show()
     }    
 
